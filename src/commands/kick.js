@@ -1,4 +1,8 @@
-import { SlashCommandBuilder, MessageFlags } from 'discord.js';
+import {
+  SlashCommandBuilder,
+  MessageFlags,
+  PermissionsBitField,
+} from 'discord.js';
 
 const data = new SlashCommandBuilder()
   .setName('kick')
@@ -16,13 +20,11 @@ const data = new SlashCommandBuilder()
   );
 
 const execute = async (interaction) => {
-  // TODO: Permissions in interactionCreate.js
-
   const user = interaction.options.getUser('user');
   const reason = interaction.options.getString('reason');
 
   if (
-    !interaction.me.permissions.has(PermissionsBitField.Flags.KickMembers, true)
+    !interaction.appPermissions.has(PermissionsBitField.Flags.KickMembers, true)
   )
     return interaction.reply({
       content:
@@ -39,6 +41,11 @@ const execute = async (interaction) => {
   try {
     await user.kick(reason ? reason : 'No reason provided.');
   } catch (error) {
+    console.error(
+      'An error occurred while attempting to kick this user:',
+      error
+    );
+
     return interaction.reply({
       content:
         'An error occurred while attempting to kick this user. Please try again later.',

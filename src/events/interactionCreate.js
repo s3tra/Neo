@@ -1,4 +1,5 @@
-import { MessageFlags } from 'discord.js';
+import { MessageFlags, PermissionsBitField } from 'discord.js';
+import { getData } from 'storelite2';
 
 const execute = async (interaction) => {
   if (interaction.isChatInputCommand()) {
@@ -10,8 +11,25 @@ const execute = async (interaction) => {
       );
     }
 
+    let guildData = await getData(interaction.guild.id);
+    if (!guildData || !guildData.modUsers)
+      guildData = { _key: interaction.guild.id, modUsers: [] };
+
+    let modUsers = guildData.modUsers;
+
+    if (
+      !modUsers.includes(interaction.user.id) &&
+      !interaction.member.permissions.has(
+        PermissionsBitField.Flags.Administrator
+      )
+    )
+      return interaction.reply({
+        content: 'You do not have permission to run this command.',
+        flags: MessageFlags.Ephemeral,
+      });
+
     try {
-      await command.execute(interaction);
+      await command.execute(interaction, guildData);
     } catch (error) {
       await interaction.reply({
         content: 'An error occured while executing the command.',

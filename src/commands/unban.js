@@ -1,4 +1,8 @@
-import { SlashCommandBuilder, MessageFlags } from 'discord.js';
+import {
+  SlashCommandBuilder,
+  MessageFlags,
+  PermissionsBitField,
+} from 'discord.js';
 
 const data = new SlashCommandBuilder()
   .setName('unban')
@@ -14,13 +18,11 @@ const data = new SlashCommandBuilder()
   );
 
 const execute = async (interaction) => {
-  // TODO: Permissions in interactionCreate.js
-
   const user = interaction.options.getUser('user');
   const reason = interaction.options.getString('reason');
 
   if (
-    !interaction.me.permissions.has(PermissionsBitField.Flags.BanMembers, true)
+    !interaction.appPermissions.has(PermissionsBitField.Flags.BanMembers, true)
   )
     return interaction.reply({
       content:
@@ -34,6 +36,11 @@ const execute = async (interaction) => {
       reason ? reason : 'No reason provided.'
     );
   } catch (error) {
+    console.error(
+      'An error occurred while attempting to unban this user:',
+      error
+    );
+
     return interaction.reply({
       content:
         'An error occurred while attempting to unban this user. Please try again later.',

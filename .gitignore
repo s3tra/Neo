@@ -1,5 +1,6 @@
 # production
 .env
+data.json
 /node_modules
 
 # development

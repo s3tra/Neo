@@ -32,6 +32,12 @@ const execute = async (interaction) => {
       flags: MessageFlags.Ephemeral,
     });
 
+  if (user.id == interaction.user.id)
+    return interaction.reply({
+      content: 'You are unable to ban yourself.',
+      flags: MessageFlags.Ephemeral,
+    });
+
   if (user.bot || !user.kickable)
     return interaction.reply({
       content: 'This user cannot be banned due to their permissions or status.',

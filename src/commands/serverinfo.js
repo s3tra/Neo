@@ -1,10 +1,10 @@
-import { SlashCommandBuilder, MessageFlags, EmbedBuilder } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 
 const data = new SlashCommandBuilder()
   .setName('serverinfo')
   .setDescription('Display information about the server.');
 
-const execute = async (interaction, guildData) => {
+const execute = async (interaction) => {
   const guild = interaction.guild;
 
   const embed = new EmbedBuilder()

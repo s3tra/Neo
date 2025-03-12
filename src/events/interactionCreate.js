@@ -12,8 +12,8 @@ const execute = async (interaction) => {
     }
 
     let guildData = await getData(interaction.guild.id);
-    if (!guildData || !guildData.modUsers)
-      guildData = { _key: interaction.guild.id, modUsers: [] };
+    if (!guildData) guildData = { _key: interaction.guild.id, modUsers: [] };
+    if (!guildData.modUsers) guildData.modUsers = [];
 
     let modUsers = guildData.modUsers;
 

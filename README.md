@@ -1,2 +1,19 @@
-<h3>Neo Moderation Bot</h3>
-<p>Neo is a lightweight, open-source Discord moderation bot designed for ease of use and customization. It offers core features for moderation and user management, making it an ideal solution for managing your Discord server effectively.</p>
+# Neo Discord Bot
+
+**Neo** is a lightweight, open-source moderation bot for Discord, designed with simplicity and customization in mind.
+
+Fully open-source and free to use, Neo is available for download anytime.
+
+## Notable Commands
+
+- `/ban` – Ban a user from the server.
+- `/kick` – Kick a user from the server.
+- `/unban` – Unban a user from the server.
+- `/serverinfo` – View server information.
+- `/addmod` – Add moderators who can manage these commands.
+- `/delmod` – Remove moderators who can no longer manage these commands.
+
+## Features
+
+- Easy-to-edit local database
+- Automatic database updates using the **storelite2** npm package

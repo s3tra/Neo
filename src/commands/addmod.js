@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, MessageFlags } from 'discord.js';
-import { saveData } from 'storelite2';
+import { saveData, validate } from 'storelite2';
 
 const data = new SlashCommandBuilder()
   .setName('addmod')
@@ -30,10 +30,18 @@ const execute = async (interaction, guildData) => {
       });
 
     modUsers.push(user.id);
-    await saveData({
+
+    const newData = {
       _key: interaction.guild.id,
       modUsers: modUsers,
-    });
+    };
+
+    if (validate(newData)) await saveData(newData);
+    else
+      return interaction.reply({
+        content: 'Invalid save data.',
+        flags: MessageFlags.Ephemeral,
+      });
   } catch (error) {
     console.error(
       'An error occurred while attempting to update the database:',

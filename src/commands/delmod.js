@@ -60,6 +60,7 @@ const execute = async (interaction, guildData) => {
 
   await interaction.reply({
     content: 'The user no longer has moderator permissions.',
+    flags: MessageFlags.Ephemeral,
   });
 };
 

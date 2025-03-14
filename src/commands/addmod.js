@@ -57,6 +57,7 @@ const execute = async (interaction, guildData) => {
 
   await interaction.reply({
     content: 'The user has been given moderator permissions.',
+    flags: MessageFlags.Ephemeral,
   });
 };
 

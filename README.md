@@ -1,5 +1,7 @@
 # Neo Discord Bot
 
+[![CodeFactor](https://www.codefactor.io/repository/github/s3tra/neo/badge)](https://www.codefactor.io/repository/github/s3tra/neo)
+
 **Neo** is a lightweight, open-source moderation bot for Discord, designed with simplicity and customization in mind.
 
 Fully open-source and free to use, Neo is available for download anytime.
